@@ -12,7 +12,7 @@ export default async function CarsPage() {
   const filtersData = await getCarFilters();
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-12 pt-28">
+    <div className="w-full max-w-[1750px] mx-auto px-4 sm:px-8 lg:px-12 py-12 pt-28">
       <div className="mb-8">
         <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">
           Real-time Inventory

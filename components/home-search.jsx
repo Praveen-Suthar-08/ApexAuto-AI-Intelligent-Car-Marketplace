@@ -110,25 +110,25 @@ export function HomeSearch() {
   };
 
   return (
-    <div>
+    <div className="w-full max-w-4xl mx-auto">
       <form onSubmit={handleTextSearch} className="relative">
-        <div className="relative flex items-center shadow-2xl rounded-full bg-white/95 backdrop-blur-xl p-1.5 border border-slate-200/80 hover:border-indigo-300 transition-all group focus-within:ring-4 focus-within:ring-indigo-500/15 focus-within:border-indigo-500">
-          <Search className="absolute left-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={22} />
+        <div className="relative flex items-center shadow-2xl rounded-full bg-white/95 backdrop-blur-xl p-2 border border-slate-200/80 hover:border-indigo-300 transition-all group focus-within:ring-4 focus-within:ring-indigo-500/15 focus-within:border-indigo-500">
+          <Search className="absolute left-6 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={24} />
           <Input
             type="text"
-            placeholder="Search by make, model, electric, luxury, SUV..."
+            placeholder="Search by make, model, electric, luxury, SUV, price..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-12 pr-28 py-6 w-full rounded-full border-none shadow-none text-slate-800 placeholder:text-slate-400 text-base focus-visible:ring-0"
+            className="pl-16 pr-36 py-7 w-full rounded-full border-none shadow-none text-slate-800 placeholder:text-slate-400 text-base md:text-lg focus-visible:ring-0"
           />
 
           {/* Image Search Button */}
-          <div className="absolute right-[115px]">
+          <div className="absolute right-[132px]">
             <button
               type="button"
               title="Search by Car Photo (AI Vision)"
               onClick={() => setIsImageSearchActive(!isImageSearchActive)}
-              className={`p-2.5 rounded-full transition-all flex items-center gap-1.5 text-xs font-semibold ${
+              className={`px-3 py-2 rounded-full transition-all flex items-center gap-1.5 text-xs font-semibold ${
                 isImageSearchActive
                   ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/30 scale-105"
                   : "bg-slate-100 hover:bg-slate-200 text-slate-700"
@@ -139,7 +139,7 @@ export function HomeSearch() {
             </button>
           </div>
 
-          <Button type="submit" className="rounded-full px-6 py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md shadow-indigo-600/25 transition-all">
+          <Button type="submit" className="rounded-full px-8 py-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-base shadow-md shadow-indigo-600/25 transition-all">
             Search
           </Button>
         </div>
@@ -148,20 +148,21 @@ export function HomeSearch() {
       {/* Quick Search Chips */}
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
         <span className="text-slate-400 font-medium mr-1">Trending:</span>
-        {["Electric", "Sedan", "SUV", "BMW", "Tesla", "Under $30k"].map((tag) => (
-          <button
-            key={tag}
-            type="button"
-            onClick={() => {
-              if (tag === "Electric") router.push("/cars?fuelType=Electric");
-              else if (tag === "Sedan" || tag === "SUV") router.push(`/cars?bodyType=${tag}`);
-              else if (tag === "BMW" || tag === "Tesla") router.push(`/cars?make=${tag}`);
-              else router.push("/cars");
-            }}
-            className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15 backdrop-blur-sm transition-all hover:scale-105 cursor-pointer"
+        {[
+          { label: "Electric", href: "/cars?fuelType=Electric" },
+          { label: "Sedan", href: "/cars?bodyType=Sedan" },
+          { label: "SUV", href: "/cars?bodyType=SUV" },
+          { label: "BMW", href: "/cars?make=BMW" },
+          { label: "Tesla", href: "/cars?make=Tesla" },
+          { label: "Under $30k", href: "/cars?maxPrice=30000" },
+        ].map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15 backdrop-blur-sm transition-all hover:scale-105 cursor-pointer inline-block"
           >
-            {tag}
-          </button>
+            {item.label}
+          </a>
         ))}
       </div>
 

@@ -134,8 +134,26 @@ npx prisma generate
 npx prisma db push
 ```
 
-### 5. Run Local Development Server
+### 5. Run the Project
+
+#### Option A: One-Click Quick Launchers (From Workspace Root)
+- **Windows Batch**: Double-click or run [run-dev.bat](file:///c:/Praveen/Projects/AI_Car_MarketPlace/run-dev.bat)
+- **PowerShell**: Run `./run-dev.ps1` from root:
+  ```powershell
+  .\run-dev.ps1
+  ```
+
+#### Option B: Manual Terminal Execution
 ```bash
+cd ai-car-marketplace-main
+
+# If installing packages for the first time
+npm install --legacy-peer-deps
+
+# Generate Prisma Client
+npx prisma generate
+
+# Start Next.js Development Server (Turbopack)
 npm run dev
 ```
 

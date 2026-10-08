@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { toggleSavedCar } from "@/actions/car-listing";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import useFetch from "@/hooks/use-fetch";
 
@@ -133,14 +133,13 @@ export const CarCard = ({ car }) => {
         </div>
 
         <div>
-          <Button
-            className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-semibold rounded-xl py-5 shadow-sm transition-all group-hover:shadow-md"
-            onClick={() => {
-              router.push(`/cars/${car.id}`);
-            }}
-          >
-            Inspect Vehicle & Book Drive
-          </Button>
+          <Link href={`/cars/${car.id}`} className="block w-full">
+            <Button
+              className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-semibold rounded-xl py-5 shadow-sm transition-all group-hover:shadow-md cursor-pointer"
+            >
+              Inspect Vehicle & Book Drive
+            </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>

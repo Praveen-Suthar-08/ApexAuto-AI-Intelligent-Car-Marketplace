@@ -20,6 +20,11 @@ function serializeCarData(car) {
  */
 export async function getFeaturedCars(limit = 3) {
   try {
+    if (!process.env.DATABASE_URL) {
+      const { featuredCars: mockCars } = await import("@/lib/data");
+      return mockCars.slice(0, limit);
+    }
+
     const cars = await db.car.findMany({
       where: {
         featured: true,
@@ -31,7 +36,9 @@ export async function getFeaturedCars(limit = 3) {
 
     return cars.map(serializeCarData);
   } catch (error) {
-    throw new Error("Error fetching featured cars:" + error.message);
+    console.warn("Notice: DATABASE_URL not set or DB unreachable. Falling back to demo vehicles:", error.message);
+    const { featuredCars: mockCars } = await import("@/lib/data");
+    return mockCars.slice(0, limit);
   }
 }
 

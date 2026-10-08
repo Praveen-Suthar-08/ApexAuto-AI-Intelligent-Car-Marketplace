@@ -1,6 +1,6 @@
 import { getSavedCars } from "@/actions/car-listing";
 import { SavedCarsList } from "./_components/saved-cars-list";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/lib/auth-server";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -19,8 +19,11 @@ export default async function SavedCarsPage() {
   const savedCarsResult = await getSavedCars();
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-6xl mb-6 gradient-title">Your Saved Cars</h1>
+    <div className="w-full max-w-[1750px] mx-auto px-4 sm:px-8 lg:px-12 py-12 pt-28">
+      <div className="mb-8">
+        <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">Your Saved Cars</h1>
+        <p className="text-slate-500 text-sm mt-1">Review vehicles you have bookmarked for comparison and booking.</p>
+      </div>
       <SavedCarsList initialData={savedCarsResult} />
     </div>
   );
